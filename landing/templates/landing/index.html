@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>ТехноКот</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Exo+2|Fira+Sans|Press+Start+2P&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../../static/landing/css/style.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="intro">
+        <video autoplay loop poster="../../static/landing/img/cat-poster.jpg" id="cat-video">
+            <source src="../../static/landing/video/cat1.webm" type="video/webm">
+            <source src="../../static/landing/video/cat1.mp4" type="video/mp4">
+            <source src="../../static/landing/video/cat1.ogv" type="video/ogv">      
+        </video>
+        <div id="intro-main-outer">
+        <div id="intro-main-middle">
+        <div id="intro-main-inner">
+            <p id="intro-header">ТехноКот</p>
+            <div id="intro-button">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input id="show-main-button" type="submit" value="Порадуй котика" name="intro-button"/>
+                </form>
+             </div> 
+        </div>
+        </div>
+        </div>
+    </div>
+
+    <div id="main" style="display: none">
+        <div id="logo">
+             ТехноКот
+        </div>
+        <div id="main-wrapper">
+            <div id="preorder">
+                <div id="photo">
+                    <img src="../../static/landing/img/band1.jpg" />
+                </div>
+                <div id="header">
+                    Подари коту умный браслет
+                </div>
+            </div>
+       </div>
+       <div id="main-wrapper-features">
+           <div id="info">
+               <div id= "features-list" class="listed-info">
+                    <ul>
+                        <li>Следит за активностью котика</li>
+                        <li>Постит от его имени в вк</li>
+                        <li>Предупреждает о самочувствии питомца</li>
+                    </ul>
+               </div>
+               <div id="metrics-list" class="listed-info">
+                   <ul>
+                       <li>Натруальные материалы</li>
+                       <li>Футуристичный дизайн</li>
+                       <li>Умная начинка</li>
+                       <li>3500 руб. </li>
+                   </ul>
+               </div>
+           </div>
+           <div id="preorder">
+               <div class="preorder-form" id="preorder-form-input-1">
+                    <form action="" method="post">
+                    {% csrf_token %}
+                         <input type="email" placeholder="email" name="email" id="email-input-1"/>
+                         <input type="submit" value="Хочу такой" name="submit-button" class="submit-button" id="input-1"/>
+                    </form>
+                </div>
+                <div class="thanks" id ="thanks-input-1" style="display:none">
+                     Спасибо за фидбек! Мы уже пишем тебе письмо;)
+                </div>
+           </div>
+          </div>
+        </div>
+    </div>
+</body>
+<script>
+    $( document ).ready(function(){
+        function changeLocation(divID) {
+            var locationStr = window.location.toString();
+            //alert(typeof(locationStr));
+            $('html,body').animate({
+                scrollTo: $( '#' + divID).offset().top
+                },
+                'slow' 
+             );   
+            //window.location = locationStr.split('#')[0] + '#' + divID;
+        }
+
+        $("#show-main-button").click(function(event){
+            event.preventDefault();
+            $("#intro").hide();
+            $("#main").show();
+            $('body').css({
+                overflowY: 'scroll'
+            });
+        });
+        
+        var screenHeight = $(window).height();
+        $("#preorder").css('min-height', screenHeight); 
+
+        $(".submit-button").click(function(event){
+            event.preventDefault();
+            var current_id = $(this).attr('id')
+            var email = $( '#email-' +  current_id).val();
+            //alert(current_id);
+            //alert(email);
+            $.get('/email-ajax', 
+                  { 'email': email }, 
+                  function(response) {
+                      var responseObj = $.parseJSON(response);
+                      if (responseObj['resultFlag']) {
+                          $('#preorder-form-' + current_id).hide();
+                          $('#thanks-' + current_id).show();
+                      }
+                  }
+            );
+        });
+
+        //$("#features").css('min-height', screenHeight - 95);
+
+        /*var scrollTopPos = 0;
+        var enableScrollFlag = true;
+        $( window ).scroll(function(event) {
+            if (enableScrollFlag) {
+                enableScrollFlag = false;
+                event.preventDefault();
+                var st = $( this ).scrollTop();
+                if (st > scrollTopPos) {
+                    changeLocation('features');    
+                }
+                else {
+                    changeLocation('preorder');  
+                }
+                scrollTopPos = st;
+            }
+            else {
+                enableScrollFlag = true;
+            }
+        });*/
+     })
+</script>
+</html>
