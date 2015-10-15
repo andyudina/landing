@@ -132,7 +132,7 @@
             var email = $( '#email-' +  current_id).val();
             //alert(current_id);
             //alert(email);
-            $.post('/email-ajax', 
+            $.post('/email-ajax/', 
                   { 'email': email }, 
                   function(response) {
                       var responseObj = $.parseJSON(response);
