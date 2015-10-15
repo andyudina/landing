@@ -79,6 +79,22 @@
 </body>
 <script>
     $( document ).ready(function(){
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
         function changeLocation(divID) {
             var locationStr = window.location.toString();
             //alert(typeof(locationStr));
@@ -101,14 +117,22 @@
         
         var screenHeight = $(window).height();
         $("#preorder").css('min-height', screenHeight); 
-
+        
+        var csrftoken = getCookie('csrftoken');
+        
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        });
+        
         $(".submit-button").click(function(event){
             event.preventDefault();
             var current_id = $(this).attr('id')
             var email = $( '#email-' +  current_id).val();
             //alert(current_id);
             //alert(email);
-            $.get('/email-ajax', 
+            $.post('/email-ajax', 
                   { 'email': email }, 
                   function(response) {
                       var responseObj = $.parseJSON(response);
