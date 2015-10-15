@@ -8,7 +8,7 @@
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 </head>
 <body>
-    <div id="intro">
+    <div id="intro"  style="display: none">
         <video autoplay loop poster="../../static/landing/img/cat-poster.jpg" id="cat-video">
             <source src="../../static/landing/video/cat1.webm" type="video/webm">
             <source src="../../static/landing/video/cat1.mp4" type="video/mp4">
@@ -29,14 +29,14 @@
         </div>
     </div>
 
-    <div id="main" style="display: none">
+    <div id="main">
         <div id="logo">
              ТехноКот
         </div>
         <div id="main-wrapper">
             <div id="preorder">
                 <div id="photo">
-                    <img src="../../static/landing/img/band.jpg" />
+                    <img src="../../static/landing/img/band1.jpg" />
                 </div>
                 <div id="header">
                     Подари коту умный браслет
