@@ -10,11 +10,10 @@ def index(request):
 
 def email_ajax(request):
     try:
-        email = request.GET['email']
+        email = request.POST.get('email')
         if len(email) < MIN_EMAIL_LEN:
             raise Exception
         Lead.objects.create(email=email)
-        print Lead.objects.all()
         return HttpResponse(json.dumps({'resultFlag': True}))
-    except Exception:
-        return HttpResponse(json.dumps({'resultFlag': False}))
+    except Exception as e:
+        return HttpResponse(json.dumps({'resultFlag': False, 'error': e}))
