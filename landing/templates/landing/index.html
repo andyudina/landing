@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>ТехноКот</title>
+    <title>TechnoCat</title>
     <link href='https://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Exo+2|Fira+Sans|Press+Start+2P&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../../static/landing/css/style.css">
@@ -17,11 +17,11 @@
         <div id="intro-main-outer">
         <div id="intro-main-middle">
         <div id="intro-main-inner">
-            <p id="intro-header">ТехноКот</p>
+            <p id="intro-header">TechnoCat</p>
             <div id="intro-button">
                 <form action="" method="post">
                     {% csrf_token %}
-                    <input id="show-main-button" type="submit" value="Порадуй котика" name="intro-button"/>
+                    <input id="show-main-button" type="submit" value="Make your cat happy" name="intro-button"/>
                 </form>
              </div> 
         </div>
@@ -31,7 +31,7 @@
 
     <div id="main" style="display: none">
         <div id="logo">
-             ТехноКот
+             TechoCat
         </div>
         <div id="main-wrapper">
             <div id="preorder">
@@ -39,7 +39,7 @@
                     <img src="../../static/landing/img/band1.jpg" />
                 </div>
                 <div id="header">
-                    Подари коту умный браслет
+                    Give your cat the smart band
                 </div>
             </div>
        </div>
@@ -47,17 +47,17 @@
            <div id="info">
                <div id= "features-list" class="listed-info">
                     <ul>
-                        <li>Следит за активностью котика</li>
-                        <li>Постит от его имени в вк</li>
-                        <li>Предупреждает о самочувствии питомца</li>
+                        <li>Track your cat's activity</li>
+                        <li>Posts on facebook on your pet's behalf</li>
+                        <li>Warns you about your pet's health</li>
                     </ul>
                </div>
                <div id="metrics-list" class="listed-info">
                    <ul>
-                       <li>Натруальные материалы</li>
-                       <li>Футуристичный дизайн</li>
-                       <li>Умная начинка</li>
-                       <li>3500 руб. </li>
+                       <li>Natural materials</li>
+                       <li>Futuristic design</li>
+                       <li>Smart stuff inside</li>
+                       <li>35€</li>
                    </ul>
                </div>
            </div>
@@ -66,11 +66,11 @@
                     <form action="" method="post">
                     {% csrf_token %}
                          <input type="email" placeholder="email" name="email" id="email-input-1"/>
-                         <input type="submit" value="Хочу такой" name="submit-button" class="submit-button" id="input-1"/>
+                         <input type="submit" value="Order now" name="submit-button" class="submit-button" id="input-1"/>
                     </form>
                 </div>
                 <div class="thanks" id ="thanks-input-1" style="display:none">
-                     Спасибо за фидбек! Мы уже пишем тебе письмо;)
+                     Thanks! We'll contact you in an hour ;)
                 </div>
            </div>
           </div>
